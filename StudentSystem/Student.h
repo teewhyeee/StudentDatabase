@@ -2,35 +2,43 @@
 
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
-#include <ctime>
 #include <iomanip>
+#include <string>
 
 using namespace std;
+
+const int MAX_STUDENTS = 100;
+const int NUM_ASSIGNMENTS = 5;
+const int NUM_COURSES = 3;
 
 struct SillyStudent {
 
 	string firstName;
 	string lastName;
 	int id;
-	double grade;
-};
+	
+	double assignments[NUM_ASSIGNMENTS];
+	double average;
 
-const int MAX_STUDENTS = 24;
-const int NUM_ASSIGNMENTS = 5;
+	string courses[NUM_COURSES];
+};
 
 void menu();
 
-void red(string value);
+void lightBlue(string value);
 
-void allStudents(SillyStudent sillyStudents[], int& count);
-void displayEveryStudentInfo(double grades[][NUM_ASSIGNMENTS], SillyStudent sillyStudents[], int count);
+void loadAllStudents(SillyStudent sillyStudents[], int& count);
+void displayEveryStudentInfo(SillyStudent sillyStudents[], int count);
 
-void generatingGreatGrades(double grades[][NUM_ASSIGNMENTS], int count);
-void calculatingAverage(double grades[][NUM_ASSIGNMENTS], SillyStudent sillyStudents[], int count);
+void calculatingAllAverages(SillyStudent sillyStudents[], int count);
+void calculatingAverage(SillyStudent* s);
+void showAssignmentAverage(SillyStudent sillyStudents[], int count);
+void sortByAverage(SillyStudent sillyStudent[], int count);
 
-void updateGreatAssignments(double grades[][NUM_ASSIGNMENTS], SillyStudent sillyStudents[], int count);
-void addingStudents(SillyStudent sillyStudents[], int& count, double grades[][NUM_ASSIGNMENTS]);
+void searchByCourse(SillyStudent sillyStudents[], int count);
+void showMostDifficultAssignemnt(SillyStudent sillyStudent[], int count);
+void courseEnrollment(SillyStudent sillyStudent[], int count);
+
+void addingStudents(SillyStudent sillyStudents[], int& count);
+void studentsAtRisk(SillyStudent sillyStudents[], int count);
 void savingStudents(SillyStudent sillyStudents[], int count);
-
-void search(double grades[][NUM_ASSIGNMENTS], SillyStudent sillyStudents[], int count);
