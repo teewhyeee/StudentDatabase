@@ -93,6 +93,20 @@ void calculatingAllAverages(SillyStudent sillyStudents[], int count) {
 	 }
 }
 
+void calculateOneAverage(SillyStudent* s) {
+
+		double one = 0;
+
+		for (int j = 0; j < NUM_ASSIGNMENTS; j++) {
+
+			one += s->assignments[j];
+
+		}
+
+		s->average = one / NUM_ASSIGNMENTS;
+	
+}
+
 void searchByCourse(SillyStudent sillyStudents[], int count) {
 
 	string searchCourse;
@@ -231,51 +245,105 @@ void sortByAverage(SillyStudent sillyStudents[], int count) {
 	displayEveryStudentInfo(sillyStudents, count);
 }
 
+void studentsAtRisk(SillyStudent sillyStudents[], int count) {
 
+	cout << endl << "===== STUDENTS AT RISK =====" << endl;
 
+	lightBlue("ID\tLName\t\tFName\t\t");
 
-//void addingStudents(SillyStudent sillyStudents[], int& count) {
-//
-//	if (count >= MAX_STUDENTS) {
-//		cout << endl << "You can not add anymore students!" << endl;
-//		return;
-//	}
-//	cout << "What is their..." << endl;
-//
-//	cout << "First Name: ";
-//	cin >> sillyStudents[count].firstName;
-//
-//	cout << "Last Name: ";
-//	cin >> sillyStudents[count].lastName;
-//
-//	cout << "ID Number: ";
-//	cin >> sillyStudents[count].id;
-//
-//	for (int r = 0; r < NUM_ASSIGNMENTS; r++) {
-//
-//		//grades[count][r] = rand() % 41 + 60;
-//	}
-//
-//	count++;
-//
-//	cout << endl << "Student successfully added!" << endl;
-//
-//}
-//
-//void savingStudents(SillyStudent sillyStudents[], int count) {
-//
-//	ofstream outputFile("students.txt");
-//
-//	for (int i = 0; i < count; i++) {
-//
-//		outputFile
-//			<< sillyStudents[i].firstName << " "
-//			<< sillyStudents[i].lastName << " "
-//			<< sillyStudents[i].id << " ";
-//			//<< sillyStudents[i].grade << endl;
-//	}
-//
-//	outputFile.close();
-//
-//	cout << "Data has been saved!" << endl;
-//}
+	cout << endl;
+
+	for (int i = 0; i < count; i++) {
+
+		bool risky = false;
+
+		for (int j = 0; j < NUM_ASSIGNMENTS; j++) {
+
+			if (sillyStudents[i].assignments[j] < 50) {
+
+				risky = true;
+			}
+		}
+
+		if (risky &&
+			sillyStudents[i].average >= 50 &&
+			sillyStudents[i].average <= 59)
+
+			cout << sillyStudents[i].id << "\t"
+			<< sillyStudents[i].lastName << "      \t"
+			<< sillyStudents[i].firstName << "      \t" << endl;
+	}
+}
+
+void addingStudents(SillyStudent sillyStudents[], int& count) {
+
+	if (count >= MAX_STUDENTS) {
+		cout << endl << "You can not add anymore students!" << endl;
+		return;
+	}
+	
+	cout << "What is their..." << endl << endl;
+
+	cout << "First Name: ";
+	cin >> sillyStudents[count].firstName;
+
+	cout << "Last Name: ";
+	cin >> sillyStudents[count].lastName;
+
+	cout << "ID Number: ";
+	cin >> sillyStudents[count].id;
+
+	cout << endl << "What are their markes??" << endl;
+
+	for (int r = 0; r < NUM_ASSIGNMENTS; r++) {
+
+		cout << "A" << r + 1 << ": ";
+		cin >> sillyStudents[count].assignments[r];
+	}
+
+	cout << endl << "What courses are they in?" << endl;
+
+	for (int c = 0; c < NUM_COURSES; c++) {
+
+		cout << "Course " << c + 1 << ": ";
+		cin >> sillyStudents[count].courses[c];
+	}
+
+	calculateOneAverage(&sillyStudents[count]);
+
+	count++;
+
+	cout << endl << "Student successfully added!" << endl;
+}
+
+void savingStudents(SillyStudent sillyStudents[], int count) {
+
+	ofstream outputFile("Students90.txt");
+
+	for (int i = 0; i < count; i++) {
+
+		outputFile
+			<< sillyStudents[i].firstName << " "
+			<< sillyStudents[i].lastName << " "
+			<< sillyStudents[i].id << " ";
+
+		for (int j = 0; j < NUM_ASSIGNMENTS; j++) {
+
+			outputFile << sillyStudents[i].assignments[j] << " ";
+		}
+
+		outputFile << sillyStudents[i].average << " ";
+
+		for (int k = 0; k < NUM_COURSES; k++) {
+
+			outputFile << sillyStudents[i].courses[k] << " ";
+		}
+
+		outputFile << endl;
+		
+	}
+
+	outputFile.close();
+
+	cout << "Data has been saved!" << endl;
+}

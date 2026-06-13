@@ -31,6 +31,7 @@ void loadAllStudents(SillyStudent sillyStudents[], int& count);
 void displayEveryStudentInfo(SillyStudent sillyStudents[], int count);
 
 void calculatingAllAverages(SillyStudent sillyStudents[], int count);
+void calculateOneAverage(SillyStudent* s);
 void showAssignmentAverage(SillyStudent sillyStudents[], int count);
 void sortByAverage(SillyStudent sillyStudents[], int count);
 

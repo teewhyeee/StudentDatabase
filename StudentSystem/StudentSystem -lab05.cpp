@@ -43,12 +43,19 @@ int main() {
 			break;
 
 		case 7:
+			studentsAtRisk(sillyStudents, count);
 			break;
 
 		case 8:
+			addingStudents(sillyStudents, count);
+			displayEveryStudentInfo(sillyStudents, count);
 			break;
 
 		case 9:
+			savingStudents(sillyStudents, count);
+			count = 0;
+			loadAllStudents(sillyStudents, count);
+			displayEveryStudentInfo(sillyStudents, count);
 			break;
 
 		case 10:
