@@ -126,6 +126,26 @@ void searchByCourse(SillyStudent sillyStudents[], int count) {
 	}
 }
 
+void showAssignmentAverage(SillyStudent sillyStudents[], int count) {
+
+	cout << endl << "===== Here is the AVERAGE of each assignment =====" << endl;
+
+	for (int u = 0; u < NUM_ASSIGNMENTS; u++) {
+		
+		double sum = 0;
+
+		for (int v = 0; v < count; v++) {
+
+			sum += sillyStudents[v].assignments[u];
+		}
+
+		double averageAssign = sum / count;
+
+		cout << "A" << u + 1 << ": " << averageAssign << endl;
+	}
+
+}
+
 
 //void addingStudents(SillyStudent sillyStudents[], int& count) {
 //

@@ -27,11 +27,7 @@ int main() {
 			break;
 
 		case 3:
-			cout << endl << "===== You chose to ADD a Student =====" << endl;
-
-			loadAllStudents(sillyStudents, count);
-			//calculatingAverage(grades, sillyStudents, count);
-			displayEveryStudentInfo(sillyStudents, count);
+			showAssignmentAverage(sillyStudents, count);
 			break;
 
 		case 4:
