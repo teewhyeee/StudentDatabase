@@ -9,9 +9,10 @@ void menu() {
 	cout << "4. Hardest Assignment" << endl;
 	cout << "5. Course Enrollment" << endl;
 	cout << "6. Sort by Averages" << endl;
-	cout << "7. Add Student" << endl;
-	cout << "8. Students At Risk" << endl;
-	cout << "9. Exit" << endl << endl;
+	cout << "7. Students At Risk" << endl;
+	cout << "8. Add a Student" << endl;
+	cout << "9. Save Student" << endl;
+	cout << "10. Exit" << endl << endl;
 }
 
 void lightBlue(string value) {
@@ -145,6 +146,92 @@ void showAssignmentAverage(SillyStudent sillyStudents[], int count) {
 	}
 
 }
+
+void showMostDifficultAssignemnt(SillyStudent sillyStudents[], int count) {
+
+	double lowest = 101;
+	int hardest = 0;
+
+	for (int u = 0; u < NUM_ASSIGNMENTS; u++) {
+
+		double sum = 0;
+
+		for (int v = 0; v < count; v++) {
+
+			sum += sillyStudents[v].assignments[u];
+		}
+
+		double averageAssign = sum / count;
+
+		if (averageAssign < lowest) {
+
+			lowest = averageAssign;
+			hardest = u + 1;
+		}
+	}
+
+	cout << endl << "Hardest Assignment is: A" << hardest 
+		<< " (" << "\033[31m" << lowest << "\033[0m" << ")" << endl;
+
+}
+
+void courseEnrollment(SillyStudent sillyStudents[], int count) {
+
+	cout << endl << "===== Here are the number of STUDENTS in each COURSE =====" << endl;
+
+	string courseNames[7] = {
+		"COMP220",
+		"MATH102",
+		"STAT110",
+		"ENGL150",
+		"HIST210",
+		"BIOL120",
+		"CSCI101"
+	};
+
+	for (int c = 0; c < 7; c++) {
+
+		int enrolled = 0;
+
+		for (int i = 0; i < count; i++) {
+
+			for (int j = 0; j < NUM_COURSES; j++) {
+
+				if (sillyStudents[i].courses[j] == courseNames[c]) {
+
+					enrolled++;
+				}
+			}
+		}
+
+		cout << courseNames[c] << ": " << enrolled << endl;
+	}
+}
+
+void sortByAverage(SillyStudent sillyStudents[], int count) {
+
+	for (int i = 0; i < count - 1; i++) {
+
+		int highest = i;
+
+		for (int h = i + 1; h < count; h++) {
+
+			if (sillyStudents[h].average > sillyStudents[highest].average) {
+
+				highest = h;
+			}
+		}
+
+		SillyStudent temp = sillyStudents[i];
+		sillyStudents[i] = sillyStudents[highest];
+		sillyStudents[highest] = temp;
+
+	}
+
+	displayEveryStudentInfo(sillyStudents, count);
+}
+
+
 
 
 //void addingStudents(SillyStudent sillyStudents[], int& count) {

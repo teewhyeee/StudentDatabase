@@ -31,14 +31,27 @@ int main() {
 			break;
 
 		case 4:
-			//savingStudents(sillyStudents, count);
+			showMostDifficultAssignemnt(sillyStudents, count);
 			break;
 
 		case 5:
-			
+			courseEnrollment(sillyStudents, count);
 			break;
 
 		case 6:
+			sortByAverage(sillyStudents, count);
+			break;
+
+		case 7:
+			break;
+
+		case 8:
+			break;
+
+		case 9:
+			break;
+
+		case 10:
 			cout << endl << "See ya!" << endl;
 			break;
 
@@ -48,7 +61,7 @@ int main() {
 
 		} // end of switch
 
-	} while (chooseWisely != 6);
+	} while (chooseWisely != 10);
 
 
 	return 0;

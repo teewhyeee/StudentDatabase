@@ -31,13 +31,12 @@ void loadAllStudents(SillyStudent sillyStudents[], int& count);
 void displayEveryStudentInfo(SillyStudent sillyStudents[], int count);
 
 void calculatingAllAverages(SillyStudent sillyStudents[], int count);
-void calculatingAverage(SillyStudent* s);
 void showAssignmentAverage(SillyStudent sillyStudents[], int count);
-void sortByAverage(SillyStudent sillyStudent[], int count);
+void sortByAverage(SillyStudent sillyStudents[], int count);
 
 void searchByCourse(SillyStudent sillyStudents[], int count);
-void showMostDifficultAssignemnt(SillyStudent sillyStudent[], int count);
-void courseEnrollment(SillyStudent sillyStudent[], int count);
+void showMostDifficultAssignemnt(SillyStudent sillyStudents[], int count);
+void courseEnrollment(SillyStudent sillyStudents[], int count);
 
 void addingStudents(SillyStudent sillyStudents[], int& count);
 void studentsAtRisk(SillyStudent sillyStudents[], int count);
