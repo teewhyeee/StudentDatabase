@@ -9,72 +9,88 @@ void menu() {
 	cout << "4. Hardest Assignment" << endl;
 	cout << "5. Course Enrollment" << endl;
 	cout << "6. Sort by Averages" << endl;
-	cout << "7. Students At Risk" << endl;
-	cout << "8. Add a Student" << endl;
-	cout << "9. Save Student" << endl;
-	cout << "10. Exit" << endl << endl;
+	cout << "7. Sort Names in Alphabetical Order" << endl;
+	cout << "8. Failed Students" << endl;
+	cout << "9. Students At Risk" << endl;
+	cout << "10. Add a Student" << endl;
+	cout << "11. Save Student" << endl;
+	cout << "12. Exit" << endl << endl;
 }
 
 void lightBlue(string value) {
 	cout << "\033[96m" << value << "\033[0m";
 }
 
-void loadAllStudents(SillyStudent sillyStudents[], int& count) {
+void loadAllStudents(SillyStudentNode*& head) {
 
-	ifstream inputFile("Students90.txt");
+	ifstream file("Students90.txt");
+	if (!file) {
+		cout << "Error opening file!" << endl;
+		return;
+	}
 
-	while (count < MAX_STUDENTS &&
-		inputFile >> sillyStudents[count].firstName
-		>> sillyStudents[count].lastName
-		>> sillyStudents[count].id) {
+	SillyStudent tempStudent;
 
-		for (int i = 0; i < NUM_ASSIGNMENTS; i++) {
+	while (file >> tempStudent.firstName
+		>> tempStudent.lastName
+		>> tempStudent.id) {
 
-			inputFile >> sillyStudents[count].assignments[i];
+		for (int j = 0; j < NUM_ASSIGNMENTS; j++) {
+			
+			file >> tempStudent.assignments[j];
 		}
 
-		inputFile >> sillyStudents[count].average;
+		file >> tempStudent.average;
 
 		for (int j = 0; j < NUM_COURSES; j++) {
 
-			inputFile >> sillyStudents[count].courses[j];
+			file >> tempStudent.courses[j];
 		}
 
-		count++;
+		SillyStudentNode* newNode = new SillyStudentNode();
+		newNode->data = tempStudent;
+
+		newNode->next = head;
+
+		head = newNode;
 	}
 
-	inputFile.close();
-
+	file.close();
 }
 
-void displayEveryStudentInfo(SillyStudent sillyStudents[], int count) {
+void displayEveryStudentInfo(SillyStudentNode* head) {
 
 	cout << endl << "============================================ HERE ARE ALL STUDENTS ============================================" << endl;
 
-	lightBlue("ID\tLName\t\tFName\t\t");
+	lightBlue("ID\tLName\t\t  FName\t\t  ");
 
 	for (int j = 0; j < NUM_ASSIGNMENTS; j++)
-		cout << "\033[96mA" << j + 1 << "\033[0m\t";
+		cout << "\033[96mA" << j + 1 << "\033[0m\t ";
 
 	lightBlue("AVG\tC1\tC2\tC3");
 	cout << endl;
 
-	for (int i = 0; i < count; i++)
-    {
-        cout << sillyStudents[i].id << "\t"
-            << sillyStudents[i].lastName << "      \t"
-            << sillyStudents[i].firstName << "      \t";
+	SillyStudentNode* current = head;
 
-        for (int j = 0; j < NUM_ASSIGNMENTS; j++)
-            cout << sillyStudents[i].assignments[j] << "\t";
+	while (current != nullptr) {
 
-        cout << sillyStudents[i].average << "\t";
+		cout << current->data.id << "\t";
+		cout << left << setw(18) << current->data.lastName;
+		cout << left << setw(16) << current->data.firstName;
 
-        for (int j = 0; j < NUM_COURSES; j++)
-            cout << sillyStudents[i].courses[j] << "\t";
+		for (int j = 0; j < NUM_ASSIGNMENTS; j++)
+			cout << current->data.assignments[j] << "\t ";
 
-        cout << endl;
-    }
+		cout << current->data.average << "\t";
+
+		for (int j = 0; j < NUM_COURSES; j++)
+			cout << current->data.courses[j] << "\t";
+
+		cout << endl;
+
+		current = current->next;
+	}
+
 }
 
 void calculatingAllAverages(SillyStudent sillyStudents[], int count) {
@@ -245,6 +261,40 @@ void sortByAverage(SillyStudent sillyStudents[], int count) {
 	displayEveryStudentInfo(sillyStudents, count);
 }
 
+void sortAlphabeticalOrder(SillyStudent sillyStudents[], int count) {
+
+	cout << endl << "======= Students Sorted Alphabetically =======" << endl;
+
+	for (int i = 0; i < count - 1; i++) {
+
+		int alpha = i;
+
+		for (int x = i + 1; x < count; x++) {
+
+			if (sillyStudents[x].firstName < sillyStudents[alpha].firstName) {
+
+				alpha = x;
+			}
+		}
+
+		SillyStudent temp = sillyStudents[i];
+		sillyStudents[i] = sillyStudents[alpha];
+		sillyStudents[alpha] = temp;
+	}
+
+	lightBlue("ID\tFName\t\tLName\t\t");
+	cout << endl;
+
+	for (int j = 0; j < count; j++) {
+
+		cout << sillyStudents[j].id << "\t";
+		cout << left << setw(16) << sillyStudents[j].firstName;
+		cout << sillyStudents[j].lastName << "      \t" << endl;
+	}
+
+
+}
+
 void studentsAtRisk(SillyStudent sillyStudents[], int count) {
 
 	cout << endl << "===== STUDENTS AT RISK =====" << endl;
@@ -272,6 +322,26 @@ void studentsAtRisk(SillyStudent sillyStudents[], int count) {
 			cout << sillyStudents[i].id << "\t"
 			<< sillyStudents[i].lastName << "      \t"
 			<< sillyStudents[i].firstName << "      \t" << endl;
+	}
+}
+
+void youFailedBro(SillyStudent sillyStudents[], int count) {
+
+	cout << endl << "=========== A BUNCH OF FAILURES ===========" << endl;
+
+	lightBlue("ID\tLName\t\tFName\t\tAVG");
+
+	cout << endl;
+
+	for (int i = 0; i < count; i++) {
+
+		if (sillyStudents[i].average <= 49) {
+
+			cout << sillyStudents[i].id << "\t"
+				<< sillyStudents[i].lastName << "      \t"
+				<< sillyStudents[i].firstName << "      \t" 
+				<< sillyStudents[i].average << "\t" << endl;
+		}
 	}
 }
 

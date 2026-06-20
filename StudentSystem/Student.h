@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <string>
 
 using namespace std;
 
@@ -23,22 +22,33 @@ struct SillyStudent {
 	string courses[NUM_COURSES];
 };
 
+struct SillyStudentNode {
+
+	SillyStudent data;
+	SillyStudentNode* next;
+};
+
 void menu();
 
 void lightBlue(string value);
 
-void loadAllStudents(SillyStudent sillyStudents[], int& count);
-void displayEveryStudentInfo(SillyStudent sillyStudents[], int count);
+void loadAllStudents(SillyStudentNode*& head);
+void displayEveryStudentInfo(SillyStudentNode* head);
 
-void calculatingAllAverages(SillyStudent sillyStudents[], int count);
+void calculatingAllAverages(SillyStudentNode* head);
 void calculateOneAverage(SillyStudent* s);
-void showAssignmentAverage(SillyStudent sillyStudents[], int count);
-void sortByAverage(SillyStudent sillyStudents[], int count);
+void showAssignmentAverage(SillyStudentNode* head);
+void sortByAverage(SillyStudentNode* head);
 
-void searchByCourse(SillyStudent sillyStudents[], int count);
-void showMostDifficultAssignemnt(SillyStudent sillyStudents[], int count);
-void courseEnrollment(SillyStudent sillyStudents[], int count);
+void searchByCourse(SillyStudentNode* head);
+void showMostDifficultAssignemnt(SillyStudentNode* head);
+void courseEnrollment(SillyStudentNode* head);
 
-void addingStudents(SillyStudent sillyStudents[], int& count);
-void studentsAtRisk(SillyStudent sillyStudents[], int count);
-void savingStudents(SillyStudent sillyStudents[], int count);
+void addingStudents(SillyStudentNode*& head);
+void studentsAtRisk(SillyStudentNode* head);
+void savingStudents(SillyStudentNode* head);
+
+void youFailedBro(SillyStudentNode* head);
+void sortAlphabeticalOrder(SillyStudentNode* head);
+
+void deleteList(SillyStudentNode*& head);

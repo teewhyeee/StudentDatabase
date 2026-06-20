@@ -2,12 +2,11 @@
 
 int main() {
 
-	int count = 0;
-	SillyStudent sillyStudents[MAX_STUDENTS];
+	SillyStudentNode* head = nullptr;
 	int chooseWisely;
 
-	loadAllStudents(sillyStudents, count);
-	calculatingAllAverages(sillyStudents, count);
+	loadAllStudents(head);
+	calculatingAllAverages(head);
 
 	do {
 		menu();
@@ -18,47 +17,55 @@ int main() {
 		switch (chooseWisely) {
 		case 1:
 
-			displayEveryStudentInfo(sillyStudents, count);
+			displayEveryStudentInfo(head);
 
 			break;
 
 		case 2:
-			searchByCourse(sillyStudents, count);
+			searchByCourse(head);
 			break;
 
 		case 3:
-			showAssignmentAverage(sillyStudents, count);
+			showAssignmentAverage(head);
 			break;
 
 		case 4:
-			showMostDifficultAssignemnt(sillyStudents, count);
+			showMostDifficultAssignemnt(head);
 			break;
 
 		case 5:
-			courseEnrollment(sillyStudents, count);
+			courseEnrollment(head);
 			break;
 
 		case 6:
-			sortByAverage(sillyStudents, count);
+			sortByAverage(head);
 			break;
 
 		case 7:
-			studentsAtRisk(sillyStudents, count);
+			sortAlphabeticalOrder(head);
 			break;
 
 		case 8:
-			addingStudents(sillyStudents, count);
-			displayEveryStudentInfo(sillyStudents, count);
+			youFailedBro(head);
 			break;
 
 		case 9:
-			savingStudents(sillyStudents, count);
-			count = 0;
-			loadAllStudents(sillyStudents, count);
-			displayEveryStudentInfo(sillyStudents, count);
+			studentsAtRisk(head);
 			break;
 
 		case 10:
+			addingStudents(head);
+			displayEveryStudentInfo(head);
+			break;
+
+		case 11:
+			savingStudents(head);
+			count = 0;
+			loadAllStudents(head);
+			displayEveryStudentInfo(head);
+			break;
+
+		case 12:
 			cout << endl << "See ya!" << endl;
 			break;
 
@@ -68,7 +75,10 @@ int main() {
 
 		} // end of switch
 
-	} while (chooseWisely != 10);
+	} while (chooseWisely != 12);
+
+	deleteList(head);
+	cout << "Everything was safely deleted. See ya!" << endl
 
 
 	return 0;
