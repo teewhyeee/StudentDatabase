@@ -60,13 +60,7 @@ int main() {
 
 		case 11:
 			savingStudents(head);
-			count = 0;
-			loadAllStudents(head);
 			displayEveryStudentInfo(head);
-			break;
-
-		case 12:
-			cout << endl << "See ya!" << endl;
 			break;
 
 		default:
@@ -78,8 +72,4 @@ int main() {
 	} while (chooseWisely != 12);
 
 	deleteList(head);
-	cout << "Everything was safely deleted. See ya!" << endl
-
-
-	return 0;
-}
+	cout << "Memory cleared safely. See ya!!" << endl;
