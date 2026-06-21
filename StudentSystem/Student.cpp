@@ -456,3 +456,13 @@ void savingStudents(SillyStudentNode* head) {
 
 	cout << "Data has been saved!" << endl;
 }
+
+void deleteList(SillyStudentNode*& head) {
+
+	while (head != nullptr) {
+
+		SillyStudentNode* temp = head;
+		head = head->next;
+		delete temp;
+	}
+}

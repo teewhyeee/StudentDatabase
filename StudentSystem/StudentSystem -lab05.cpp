@@ -63,6 +63,9 @@ int main() {
 			displayEveryStudentInfo(head);
 			break;
 
+		case 12:
+			break;
+
 		default:
 			cout << endl << "You're inputting something incorrect..." << endl;
 
@@ -73,3 +76,7 @@ int main() {
 
 	deleteList(head);
 	cout << "Memory cleared safely. See ya!!" << endl;
+
+	return 0;
+
+}
